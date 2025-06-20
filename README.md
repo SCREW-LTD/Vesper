@@ -54,27 +54,17 @@ $ npm run tauri dev
 <div align="left">
   <h3>✨ Vesper in Action ✨</h3>
   <p>Explore the modern, elegant interface and features of Vesper IDE.</p>
-
-  <figure style="display:inline-block; margin: 20px;">
-    <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image.png?raw=true" alt="Project Explorer" width="400" />
-    <figcaption><b>Project Explorer & Welcome</b></figcaption>
-  </figure>
-  <figure style="display:inline-block; margin: 20px;">
-    <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image (1).png?raw=true" alt="Tabbed Editing" width="400" />
-    <figcaption><b>Tabbed Editing</b></figcaption>
-  </figure>
-  <figure style="display:inline-block; margin: 20px;">
-    <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image (2).png?raw=true" alt="Code Search" width="400" />
-    <figcaption><b>Instant Project Search</b></figcaption>
-  </figure>
-  <figure style="display:inline-block; margin: 20px;">
-    <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image (3).png?raw=true" alt="Extensions" width="400" />
-    <figcaption><b>Extensions Panel</b></figcaption>
-  </figure>
-  <figure style="display:inline-block; margin: 20px;">
-    <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image (4).png?raw=true" alt="Settings & Themes" width="400" />
-    <figcaption><b>Settings & Themes</b></figcaption>
-  </figure>
+  
+  <b>Project Explorer & Welcome</b><br>
+  <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image.png?raw=true" alt="Project Explorer" width="400" /><br><br>
+  <b>Tabbed Editing</b><br>
+  <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image (1).png?raw=true" alt="Tabbed Editing" width="400" /><br><br>
+  <b>Instant Project Search</b><br>
+  <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image (2).png?raw=true" alt="Code Search" width="400" /><br><br>
+  <b>Extensions Panel</b><br>
+  <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image (3).png?raw=true" alt="Extensions" width="400" /><br><br>
+  <b>Resize anything</b><br>
+  <img src="https://github.com/SCREW-LTD/Vesper/blob/main/images/image (4).png?raw=true" alt="Resize anything" width="400" />
 </div>
 
 ---
