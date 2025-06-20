@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- Base Colors --- */
+  --color-text-primary: #d4d4d4;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #6b7280;
+  --color-text-inverted: #ffffff;
+  --color-text-disabled: #4a5568;
+
+  --color-bg-primary: #18181b; /* Sidebar icons, recent projects bg */
+  --color-bg-secondary: #23272e; /* Sidebar content, buttons, cards */
+  --color-bg-tertiary: #202124; /* Search input */
+  --color-bg-hover: #374151;
+  
+  --color-border-primary: #23272e;
+  --color-border-secondary: #374151;
+  --color-border-focus: #3b82f6;
+
+  /* --- Accent & Status Colors --- */
+  --color-accent-primary: #3b82f6; /* blue-500 */
+  --color-accent-secondary: #60a5fa; /* blue-400 */
+  --color-accent-tertiary: #93c5fd; /* blue-300 */
+  --color-accent-hover: #2563eb; /* blue-600 */
+  --color-accent-strong: #1d4ed8; /* blue-700 */
+  --color-accent-emphasis: #0f172a; /* blue-900 */
+
+  --color-highlight-yellow: #facc15;
+  --color-highlight-orange: #f97316;
+  --color-highlight-pink: #ec4899;
+  --color-highlight-green: #4ade80;
+  --color-highlight-red: #f87171;
+
+  /* --- Component Specific --- */
+  --color-sidebar-bg: var(--color-bg-primary);
+  --color-sidebar-border: var(--color-border-primary);
+  --color-sidebar-icon: var(--color-text-secondary);
+  --color-sidebar-icon-active: var(--color-accent-secondary);
+  --color-sidebar-item-active-bg: var(--color-bg-secondary);
+  --color-sidebar-item-hover-bg: var(--color-bg-secondary);
+  --color-sidebar-item-hover-text: var(--color-accent-tertiary);
+
+  --color-tab-active-bg: var(--color-bg-secondary);
+  --color-tab-active-border: var(--color-accent-primary);
+  --color-tab-inactive-bg: transparent;
+  --color-tab-text: var(--color-text-secondary);
+  --color-tab-text-active: var(--color-accent-secondary);
+  --color-tab-text-hover: var(--color-accent-tertiary);
+}
+
+html, body, #root {
+  background: #222426;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.app-shell {
+  background: #222426 !important;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.bg-darken {
+  background-color: #222426;
+}
+
+.soure-item .source-codes {
+  @apply pl-4 relative;
+}
+
+.source-item-active {
+  @apply bg-blue-800 text-gray-300;
+}
+
+.soure-item .source-codes:before {
+  content: "";
+  @apply absolute top-0 bottom-0 border-l border-dotted border-stone-500;
+}
+
+.inp {
+  @apply block w-full rounded-md outline-none shadow-sm sm:text-sm bg-primary;
+  @apply text-gray-200;
+  @apply px-2 py-0.5;
+}
+
+#titlebar {
+  @apply flex items-center justify-between text-gray-300 pl-2;
+  background: #18181b;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.titlebar-actions {
+  @apply flex items-center;
+}
+
+.titlebar-icon {
+  @apply py-0.5 cursor-pointer;
+  width: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+#ttb-close:hover {
+  @apply bg-red-500 text-gray-100;
+}
+
+.project-explorer {
+  @apply w-full text-left uppercase text-gray-400 text-xs;
+}
+
+.code-structure {
+  @apply px-2 overflow-y-auto;
+  height: calc(100vh - 70px);
+}
+
+/* Styles for scrollbar */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #465056;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Windowed editor styles */
+.window-title-bar {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: no-drag;
+  border-bottom: 1px solid #23272e;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  background: #23272e;
+  cursor: move;
+}
+
+.rnd-resizable-handle {
+  z-index: 30;
+}
+
+.rnd-resizable-handle {
+  background: #2563eb44;
+  border-radius: 2px;
+}
+
+.rnd-resizable-handle:hover {
+  background: #2563eb99;
+}
+
+/* Make sure Rnd windows are above the tab bar */
+.rnd-window {
+  position: absolute;
+  box-shadow: 0 2px 12px #0008;
+}
+
+/* Sidebar vertical icon bar */
+.sidebar-iconbar {
+  width: 44px;
+  min-width: 44px;
+  /* border-right: 1px solid #23272e; */
+  /* box-shadow: 1px 0 0 #23272e; */
+}
+.sidebar-icon-btn {
+  outline: none;
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.sidebar-icon-btn:active {
+  background: #23272e;
+}
+
+/* Sidebar content area */
+.sidebar-content {
+  background: var(--color-bg-secondary);
+  /* border-right: 1px solid #23272e; */
+  height: 100%;
+  position: relative;
+  /* resize: horizontal; */
+  /* overflow: auto; */
+}
+
+/* File explorer tree */
+.file-tree {
+  padding: 4px 0 4px 0;
+}
+.file-item, .source-folder {
+  user-select: none;
+  font-size: 13px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  padding-left: 2px;
+}
+.file-item .ri-file-edit-line {
+  margin-right: 2px;
+}
+.folder-row {
+  margin-bottom: 2px;
+}
+.chevron {
+  cursor: pointer;
+  color: #888;
+  transition: color 0.15s;
+}
+.chevron:hover {
+  color: #2563eb;
+}
+
+/* Indentation lines for tree */
+.source-codes {
+  position: relative;
+}
+.source-codes .file-item, .source-codes .source-folder {
+  position: relative;
+}
+
+/* Add a subtle highlight for selected file/folder */
+.file-item.bg-blue-900, .source-folder.bg-blue-950 {
+  box-shadow: 0 0 0 1.5px #2563eb;
+}
