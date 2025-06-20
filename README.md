@@ -51,7 +51,7 @@ $ npm run tauri dev
 
 ## 🖥️ Screenshots
 
-<div align="center">
+<div align="left">
   <h3>✨ Vesper in Action ✨</h3>
   <p>Explore the modern, elegant interface and features of Vesper IDE.</p>
 
