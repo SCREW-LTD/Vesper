@@ -79,15 +79,12 @@ export default function NavFolderItem({ file, active, depth = 0 }: Props) {
 
   return <div className="folder-row-container relative">
     <div
-      className={`folder-row group flex items-center justify-between px-2 py-1 rounded cursor-pointer text-xs transition-colors select-none ${active ? 'bg-accent-emphasis text-accent-tertiary' : 'text-text-primary hover:bg-secondary'}`}
+      className={`folder-row group flex items-center justify-between px-2 py-1 rounded cursor-pointer text-xs transition-colors select-none ${active ? 'bg-accent-emphasis text-accent-tertiary' : 'text-text-primary hover:bg-secondary hover:text-accent-tertiary'}`}
       style={{ 
         marginLeft: depth * 14,
       }}
     >
       <div className="flex items-center gap-2 flex-1" onClick={onShow}>
-        <span className="chevron mr-1 text-base w-4 inline-flex items-center justify-center">
-          <i className={`ri-arrow-right-s-line transition-transform duration-200 ${unfold ? 'rotate-90' : ''}`}></i>
-        </span>
         {iconUrl && <img src={iconUrl} className="w-4 h-4" alt=""/>}
         <span className="flex-1">{file.name}</span>
       </div>
@@ -99,13 +96,21 @@ export default function NavFolderItem({ file, active, depth = 0 }: Props) {
         className="ri-add-line ml-auto text-text-secondary hover:text-highlight-green opacity-0 group-hover:opacity-100 transition-opacity"
       ></i>
     </div>
-    {newFile ? <div className="mx-4 flex items-center gap-0.5 p-2" style={{ marginLeft: (depth + 1) * 14 + 10 }}>
+    {newFile ? <div
+      className="flex items-center gap-2 border-border-secondary rounded px-2 py-1 focus-within:border-accent-primary mb-[2px] mr-2 border"
+      style={{
+        marginLeft: `${((depth + 1) * 14) + 8}px`,
+
+      }}
+    >
       <i className="ri-file-edit-line text-text-primary"></i>
-      <input type="text" value={filename} 
+      <input type="text" value={filename}
         onChange={(ev) => setFilename(ev.target.value)}
         onKeyUp={(ev) => onEnter(ev.key)}
-        className="inp bg-tertiary text-text-primary w-full"
-        />
+        placeholder="Name..."
+        className="w-full text-xs bg-transparent focus:outline-none text-text-primary"
+        autoFocus
+      />
     </div> : null}
     {unfold && <NavFiles visible={unfold} files={files} depth={depth + 1} />}
   </div>

@@ -64,9 +64,6 @@ fn walk_directory(dir_path: &Path, base_path: &str, files: &mut Vec<FileInfo>) {
                     path: file_path.clone(),
                 };
                 files.push(new_file_info);
-                if kind == "directory" {
-                    walk_directory(&entry.path(), &file_path, files);
-                }
             }
         }
     }

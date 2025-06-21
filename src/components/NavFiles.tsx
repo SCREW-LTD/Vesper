@@ -79,7 +79,7 @@ export default function NavFiles({ rootName, files, visible, depth = 0 }: Props)
     const isSelected = file.id === selected
     if (file.kind === 'directory') {
       return (
-        <div key={file.id} style={{ marginLeft: depth * 14 }}>
+        <div key={file.id}>
           <NavFolderItem active={isSelected} file={file} depth={depth} />
         </div>
       )
@@ -90,7 +90,7 @@ export default function NavFiles({ rootName, files, visible, depth = 0 }: Props)
         key={file.id}
         className={`file-item flex items-center gap-2 px-2 py-1 rounded cursor-pointer text-xs transition-colors relative ${isSelected ? 'bg-accent-emphasis text-accent-tertiary' : 'text-text-primary hover:text-accent-tertiary hover:bg-secondary'}`}
         style={{
-          marginLeft: (depth + 1) * 14
+          paddingLeft: `${(depth * 14) + 8}px`
         }}
       >
         <FileIcon name={file.name} />
@@ -103,13 +103,10 @@ export default function NavFiles({ rootName, files, visible, depth = 0 }: Props)
     return (
       <div className={`source-codes ${visible ? '' : 'hidden'}`}>
         <div
-          className="text-sm pr-[8px] group mb-1 flex items-center justify-between gap-1 cursor-pointer select-none"
+          className="text-sm pr-[7px] group mb-1 flex items-center justify-between gap-1 cursor-pointer select-none"
           onClick={() => setExpanded(!expanded)}
         >
           <div className="flex items-center gap-1">
-            <span className="chevron mr-1 text-base w-4 inline-flex items-center justify-center">
-              <i className={`ri-arrow-right-s-line transition-transform duration-200 ${expanded ? 'rotate-90' : ''}`}></i>
-            </span>
             {iconUrl ? (
               <img src={iconUrl} className="w-4 h-4" alt="folder icon" />
             ) : (
@@ -126,13 +123,19 @@ export default function NavFiles({ rootName, files, visible, depth = 0 }: Props)
             className="ri-add-line ml-auto text-text-secondary hover:text-highlight-green opacity-0 group-hover:opacity-100 transition-opacity"
           ></i>
         </div>
-        <div className={`pl-[22px] ${expanded ? '' : 'hidden'}`}>
-          {newFile ? <div className="flex items-center gap-0.5 my-1" style={{ marginLeft: 10 }}>
+        <div className={`${expanded ? '' : 'hidden'}`}>
+          {newFile ? <div
+            className="flex items-center gap-2 border-border-secondary rounded px-2 py-1 focus-within:border-accent-primary mb-[2px] mr-2 border"
+            style={{
+              marginLeft: `${(depth * 14) + 8}px`,
+            }}
+          >
             <i className="ri-file-edit-line text-text-primary"></i>
             <input type="text" value={filename}
               onChange={(ev) => setFilename(ev.target.value)}
               onKeyUp={(ev) => onEnter(ev.key)}
-              className="inp bg-tertiary text-text-primary w-full"
+              placeholder="Name..."
+              className="w-full text-xs bg-transparent focus:outline-none text-text-primary"
               autoFocus
             />
           </div> : null}
