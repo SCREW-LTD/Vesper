@@ -103,7 +103,7 @@ export default function NavFolderItem({ file, active, depth = 0 }: Props) {
             e.stopPropagation();
             setNewFile(true)
         }} 
-        className="ri-add-line ml-auto text-text-secondary hover:text-highlight-green opacity-0 group-hover:opacity-100 transition-opacity"
+        className="ri-add-line ml-auto text-text-secondary hover:text-highlight-blue opacity-0 group-hover:opacity-100 transition-opacity"
       ></i>
     </div>
     {newFile ? <div

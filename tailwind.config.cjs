@@ -31,6 +31,7 @@ module.exports = {
         'highlight-pink': 'var(--color-highlight-pink)',
         'highlight-green': 'var(--color-highlight-green)',
         'highlight-red': 'var(--color-highlight-red)',
+        'highlight-blue': 'var(--color-highlight-blue)',
       }
     },
   },

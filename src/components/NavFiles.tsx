@@ -130,7 +130,7 @@ export default function NavFiles({ rootName, files, visible, depth = 0 }: Props)
               setNewFile(true);
               if (!expanded) setExpanded(true);
             }}
-            className="ri-add-line ml-auto text-text-secondary hover:text-highlight-green opacity-0 group-hover:opacity-100 transition-opacity"
+            className="ri-add-line ml-auto text-text-secondary hover:text-highlight-blue opacity-0 group-hover:opacity-100 transition-opacity"
           ></i>
         </div>
         <div className={`${expanded ? '' : 'hidden'}`}>
