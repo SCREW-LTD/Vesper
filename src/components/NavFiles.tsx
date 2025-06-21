@@ -68,7 +68,17 @@ export default function NavFiles({ rootName, files, visible, depth = 0 }: Props)
         kind: 'file'
       }
       saveFileObject(newFileI)
-      setLocalFiles(prevEntries => [newFileI, ...prevEntries])
+      setLocalFiles(prevEntries => {
+        const updatedEntries = [...prevEntries, newFileI];
+        // Sort folders and files alphabetically
+        const folders = updatedEntries.filter(entry => entry.kind === 'directory');
+        const files = updatedEntries.filter(entry => entry.kind === 'file');
+        
+        folders.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+        files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+        
+        return [...folders, ...files];
+      })
       setNewFile(false)
       setFilename('')
     })
@@ -88,7 +98,7 @@ export default function NavFiles({ rootName, files, visible, depth = 0 }: Props)
       <div
         onClick={() => onShow(file)}
         key={file.id}
-        className={`file-item flex items-center gap-2 px-2 py-1 rounded cursor-pointer text-xs transition-colors relative ${isSelected ? 'bg-accent-emphasis text-accent-tertiary' : 'text-text-primary hover:text-accent-tertiary hover:bg-secondary'}`}
+        className={`file-item flex items-center gap-2 px-2 py-1 rounded cursor-pointer text-[12px] transition-colors relative ${isSelected ? 'bg-accent-emphasis text-accent-tertiary' : 'text-text-primary hover:text-accent-tertiary hover:bg-secondary'}`}
         style={{
           paddingLeft: `${(depth * 14) + 8}px`
         }}
@@ -103,7 +113,7 @@ export default function NavFiles({ rootName, files, visible, depth = 0 }: Props)
     return (
       <div className={`source-codes ${visible ? '' : 'hidden'}`}>
         <div
-          className="text-sm pr-[7px] group mb-1 flex items-center justify-between gap-1 cursor-pointer select-none"
+          className="text-[12px] pr-[7px] group mb-1 flex items-center justify-between gap-1 cursor-pointer select-none"
           onClick={() => setExpanded(!expanded)}
         >
           <div className="flex items-center gap-1">

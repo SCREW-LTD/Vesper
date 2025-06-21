@@ -55,6 +55,10 @@ export const readDirectory = (folderPath: string): Promise<IFile[]> => {
 
       }
 
+      // Sort folders and files alphabetically by name
+      folders.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+      entries.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+
       resolve([...folders, ...entries]);
 
     })

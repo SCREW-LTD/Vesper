@@ -71,7 +71,17 @@ export default function NavFolderItem({ file, active, depth = 0 }: Props) {
         kind: 'file'
       }
       saveFileObject(newFile)
-      setFiles(prevEntries => [newFile, ...prevEntries])
+      setFiles(prevEntries => {
+        const updatedEntries = [...prevEntries, newFile];
+        // Sort folders and files alphabetically
+        const folders = updatedEntries.filter(entry => entry.kind === 'directory');
+        const files = updatedEntries.filter(entry => entry.kind === 'file');
+        
+        folders.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+        files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+        
+        return [...folders, ...files];
+      })
       setNewFile(false)
       setFilename('')
     })
@@ -79,7 +89,7 @@ export default function NavFolderItem({ file, active, depth = 0 }: Props) {
 
   return <div className="folder-row-container relative">
     <div
-      className={`folder-row group flex items-center justify-between px-2 py-1 rounded cursor-pointer text-xs transition-colors select-none ${active ? 'bg-accent-emphasis text-accent-tertiary' : 'text-text-primary hover:bg-secondary hover:text-accent-tertiary'}`}
+      className={`folder-row group flex items-center justify-between px-2 py-1 rounded cursor-pointer text-[12px] transition-colors select-none ${active ? 'bg-accent-emphasis text-accent-tertiary' : 'text-text-primary hover:bg-secondary hover:text-accent-tertiary'}`}
       style={{ 
         marginLeft: depth * 14,
       }}
