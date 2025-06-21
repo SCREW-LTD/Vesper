@@ -20,6 +20,8 @@ const sidebarTabs = [
   { key: "ext", label: "Extensions", icon: "ri-store-2-line" },
 ];
 
+const folderIcons: Record<string, { default: string }> = import.meta.glob('../assets/folders/*.svg', { eager: true });
+
 interface SidebarProps {
   width: number;
   collapsed: boolean;
@@ -37,6 +39,8 @@ export default function Sidebar({ width, collapsed, setCollapsed, activeTab, set
   const [results, setResults] = useState<{ file: IFile, line: number, text: string }[]>([]);
   const [loading, setLoading] = useState(false);
   const searchTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [projectIconUrl, setProjectIconUrl] = useState<string | undefined>('');
+  const [projectExpanded, setProjectExpanded] = useState(false);
 
   const allFiles: IFile[] = Object.values((fileStore as any).entries || {});
 
@@ -91,6 +95,21 @@ export default function Sidebar({ width, collapsed, setCollapsed, activeTab, set
       if (searchTimeout.current) clearTimeout(searchTimeout.current);
     };
   }, [searchValue]);
+
+  useEffect(() => {
+    if (!projectName) {
+      setProjectIconUrl('');
+      return;
+    }
+    const defaultOpen = '../assets/folders/folder-open.svg';
+    const defaultClosed = '../assets/folders/folder.svg';
+
+    const iconPath = projectExpanded
+      ? folderIcons[defaultOpen]?.default
+      : folderIcons[defaultClosed]?.default;
+
+    setProjectIconUrl(iconPath);
+  }, [projectName, projectExpanded]);
 
   if (activeTab && !collapsed) {
     lastActiveTab.current = activeTab;
@@ -240,17 +259,13 @@ export default function Sidebar({ width, collapsed, setCollapsed, activeTab, set
     if (tabKey === "explorer") {
       return (
         <div className={mini ? "p-2 text-xs bg-secondary rounded shadow-lg absolute left-12 top-4 z-50 w-64 border border-border-primary" : "p-4 text-text-primary text-xs flex flex-col gap-1"}>
-          <div className="font-semibold text-base mb-2 tracking-wide flex items-center gap-2">
+          <div className="font-semibold text-base mb-1 tracking-wide flex items-center gap-2">
             <i className="ri-file-list-2-line text-highlight-yellow text-lg"></i>
             Explorer
           </div>
           {projectName && (
             <div className="file-tree">
-              <div className="font-bold text-accent-tertiary text-xs mb-1 flex items-center gap-1">
-                <i className="ri-folder-fill text-highlight-yellow"></i>
-                <span>{projectName.split(/[\\/]/).pop()}</span>
-              </div>
-              <NavFiles visible={true} files={files} depth={0} />
+              <NavFiles visible={true} files={files} depth={0} rootName={projectName.split(/[\\/]/).pop()} />
             </div>
           )}
           {!projectName && (
@@ -262,7 +277,7 @@ export default function Sidebar({ width, collapsed, setCollapsed, activeTab, set
     if (tabKey === "search") {
       return (
         <div className={mini ? "p-2 text-xs bg-secondary rounded shadow-lg absolute left-12 top-4 z-50 w-64 border border-border-primary" : "p-4 text-text-primary text-xs flex flex-col gap-1"}>
-          <div className="font-semibold text-base mb-2 tracking-wide flex items-center gap-2">
+          <div className="font-semibold text-base mb-0 tracking-wide flex items-center gap-2">
             <i className="ri-search-line text-accent-secondary text-lg"></i>
             Search
           </div>

@@ -8,6 +8,9 @@ export default defineConfig({
     port: 1420,
     strictPort: true,
   },
+  optimizeDeps: {
+    exclude: ['@exuanbo/file-icons-js'],
+  },
 
   envPrefix: ["VITE_", "TAURI_"],
   build: {

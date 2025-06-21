@@ -1,9 +1,11 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { readDirectory, writeFile } from "../helpers/filesys";
 import { saveFileObject } from "../stores/file";
 import { IFile } from "../types";
 import NavFiles from "./NavFiles";
+
+const folderIcons: Record<string, { default: string }> = import.meta.glob('../assets/folders/*.svg', { eager: true });
 
 interface Props {
   file: IFile;
@@ -16,6 +18,29 @@ export default function NavFolderItem({ file, active, depth = 0 }: Props) {
   const [loaded, setLoaded] = useState(false)
   const [newFile, setNewFile] = useState(false)
   const [filename, setFilename] = useState('')
+  const [iconUrl, setIconUrl] = useState<string | undefined>('');
+
+  useEffect(() => {
+    const specificOpen = `../assets/folders/folder-${file.name}-open.svg`;
+    const specificClosed = `../assets/folders/folder-${file.name}.svg`;
+    const defaultOpen = '../assets/folders/folder-open.svg';
+    const defaultClosed = '../assets/folders/folder.svg';
+
+    let iconPath: string | undefined;
+
+    if (unfold) {
+      iconPath =
+        folderIcons[specificOpen]?.default ||
+        folderIcons[specificClosed]?.default ||
+        folderIcons[defaultOpen]?.default ||
+        folderIcons[defaultClosed]?.default;
+    } else {
+      iconPath =
+        folderIcons[specificClosed]?.default ||
+        folderIcons[defaultClosed]?.default;
+    }
+    setIconUrl(iconPath);
+  }, [file.name, unfold]);
 
   const onShow = async (ev: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     ev.stopPropagation()
@@ -52,19 +77,27 @@ export default function NavFolderItem({ file, active, depth = 0 }: Props) {
     })
   }
 
-  return <div className="folder-row">
+  return <div className="folder-row-container relative">
     <div
-      className={`source-folder flex items-center gap-2 px-2 py-1 rounded cursor-pointer text-xs transition-colors select-none ${active ? 'bg-orange-900/50 text-highlight-orange' : 'text-text-primary hover:bg-secondary'}`}
+      className={`folder-row group flex items-center justify-between px-2 py-1 rounded cursor-pointer text-xs transition-colors select-none ${active ? 'bg-accent-emphasis text-accent-tertiary' : 'text-text-primary hover:bg-secondary'}`}
       style={{ 
         marginLeft: depth * 14,
       }}
     >
-      <span onClick={onShow} className="chevron mr-1 text-base w-4 inline-flex items-center justify-center">
-        <i className={`ri-arrow-right-s-line transition-transform duration-200 ${unfold ? 'rotate-90' : ''}`}></i>
-      </span>
-      <i className="ri-folder-fill text-highlight-yellow"></i>
-      <span onClick={onShow} className="flex-1">{file.name}</span>
-      <i onClick={() => setNewFile(true)} className="ri-add-line ml-auto text-text-secondary hover:text-highlight-green"></i>
+      <div className="flex items-center gap-2 flex-1" onClick={onShow}>
+        <span className="chevron mr-1 text-base w-4 inline-flex items-center justify-center">
+          <i className={`ri-arrow-right-s-line transition-transform duration-200 ${unfold ? 'rotate-90' : ''}`}></i>
+        </span>
+        {iconUrl && <img src={iconUrl} className="w-4 h-4" alt=""/>}
+        <span className="flex-1">{file.name}</span>
+      </div>
+      <i 
+        onClick={(e) => {
+            e.stopPropagation();
+            setNewFile(true)
+        }} 
+        className="ri-add-line ml-auto text-text-secondary hover:text-highlight-green opacity-0 group-hover:opacity-100 transition-opacity"
+      ></i>
     </div>
     {newFile ? <div className="mx-4 flex items-center gap-0.5 p-2" style={{ marginLeft: (depth + 1) * 14 + 10 }}>
       <i className="ri-file-edit-line text-text-primary"></i>

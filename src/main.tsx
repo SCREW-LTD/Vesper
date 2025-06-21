@@ -4,6 +4,7 @@ import App from "./App";
 import "remixicon/fonts/remixicon.css"
 import "./style.css";
 import { invoke } from '@tauri-apps/api/tauri';
+import '@exuanbo/file-icons-js/dist/css/file-icons.min.css';
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

@@ -70,7 +70,7 @@ $ npm run tauri dev
 ---
 
 ## 🛠️ Tech Stack
-- **Frontend:** React, TypeScript, TailwindCSS, Monaco Editor
+- **Frontend:** Vite, TypeScript, TailwindCSS, Monaco Editor
 - **Backend:** Rust (Tauri)
 - **Other:** Framer Motion, Extension API
 
@@ -93,7 +93,7 @@ Contributions, issues and feature requests are welcome!
 - [Tauri](https://tauri.app/)
 - [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 - [Remix Icon](https://remixicon.com/)
-- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
 
 ---
