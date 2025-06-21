@@ -92,7 +92,6 @@ Contributions, issues and feature requests are welcome!
 
 - [Tauri](https://tauri.app/)
 - [Monaco Editor](https://microsoft.github.io/monaco-editor/)
-- [Remix Icon](https://remixicon.com/)
 - [Vite](https://vitejs.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
 
